@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/HomeRunIQ.Client/bin/Debug/net8.0
+/HomeRunIQ.gRPCServer/bin/Debug/net8.0
+/HomeRunIQ.gRPCServer/obj/Debug/net8.0
+/HomeRunIQ.gRPCServer/obj/Release/net8.0
+/HomeRunIQ.Client/obj
+/HomeRunIQ.gRPCServer/obj

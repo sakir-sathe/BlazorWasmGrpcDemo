@@ -1,0 +1,34 @@
+﻿@page "/"
+
+@inject Greeter.GreeterClient GreeterClient;
+
+<PageTitle>Blazor gRPC Integration Demo</PageTitle>
+
+<h1>Blazor Wasm with Backend gRPC Service Demo</h1>
+
+@if (_helloReply != null)
+{
+    <p>Welcome to your demo app. Here's a message from the backend gRPC service: <strong>@_helloReply.Message</strong></p>
+}
+else
+{
+    <p>Attempting to connect to the backend gRPC service...</p>
+}
+
+@code {
+    private HelloReply _helloReply;
+    private string _userName = "Demo User"; // Sample input parameter for the API call
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _helloReply = await GreeterClient.SayHelloAsync(new HelloRequest { Name = _userName });
+        }
+        catch (Exception ex)
+        {
+            _helloReply = new HelloReply { Message = $"An error occurred: {ex.Message}. Please try refreshing the page or contact support if the issue persists." };
+            // Optionally, log this error or handle additional error mitigation steps
+        }
+    }
+}
