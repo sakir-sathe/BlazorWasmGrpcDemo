@@ -3,23 +3,33 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using HomeRunIQ.gRPCServer.Services;
 using Grpc.AspNetCore.Web;
+using Microsoft.Extensions.Configuration;
 
 namespace HomeRunIQ.gRPCServer
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
+            services.AddHttpClient();
+            services.AddSingleton<ContentService>();
 
-            // Configure CORS to allow specific or all origins
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policyBuilder =>
                 {
-                    policyBuilder.AllowAnyOrigin()
+                    policyBuilder.AllowAnyOrigin() // Be more specific in production!
                                  .AllowAnyMethod()
-                                 .AllowAnyHeader();
+                                 .AllowAnyHeader()
+                                 .WithExposedHeaders("grpc-status", "grpc-message", "grpc-status-details-bin");
                 });
             });
         }
@@ -33,17 +43,14 @@ namespace HomeRunIQ.gRPCServer
 
             app.UseRouting();
 
-            // Apply CORS globally
             app.UseCors("AllowAll");
 
-            // Apply gRPC-Web middleware globally to support calling gRPC methods from web browsers
-            app.UseGrpcWeb();
+            app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 
-            // Map gRPC services with CORS and gRPC-Web enabled
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<GreeterService>().RequireCors("AllowAll").EnableGrpcWeb();
-                // Additional gRPC services can be mapped here
+                endpoints.MapGrpcService<ContentService>().RequireCors("AllowAll").EnableGrpcWeb();
             });
         }
     }

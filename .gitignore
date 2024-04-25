@@ -9,3 +9,7 @@
 /HomeRunIQ.gRPCServer/obj/Release/net8.0
 /HomeRunIQ.Client/obj
 /HomeRunIQ.gRPCServer/obj
+/HomeRunIQ.Client/Generated/Greet.cs
+/HomeRunIQ.Client/Generated/GreetGrpc.cs
+/HomeRunIQ.Shared/obj
+/HomeRunIQ.Shared/bin/Debug/net8.0

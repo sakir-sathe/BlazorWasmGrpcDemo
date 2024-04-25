@@ -1,0 +1,71 @@
+﻿@page "/gif-search"
+@inject ContentService.ContentServiceClient ContentClient
+@using System.Threading
+@using Microsoft.JSInterop
+
+<h1 class="header-title">GIF Search</h1>
+
+<div class="search-container">
+    <input class="search-input" @bind="searchQuery" @oninput="HandleInput" />
+    @*  <button class="search-button" @onclick="Search">Search</button> *@
+    <button class="clear-button" @onclick="Clear">Clear</button>
+</div>
+
+@if (gifs != null)
+{
+    <div class="results-container">
+        @foreach (var gif in gifs)
+        {
+            <img src="@gif.Url" alt="@gif.Title" class="result-img" />
+        }
+    </div>
+}
+
+@code {
+    private string searchQuery;
+    private List<GifResult> gifs;
+    private Timer debounceTimer;
+
+    //Demo for running JS using JSInterop
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; }
+
+    private void HandleInput(ChangeEventArgs e)
+    {
+        searchQuery = e.Value.ToString();
+        debounceTimer?.Dispose();
+        debounceTimer = new Timer(DebounceSearch, null, 1000, Timeout.Infinite);
+    }
+
+    private async void DebounceSearch(object state)
+    {
+        await Search();
+    }
+
+    private async Task Search()
+    {
+        // Check if the search query is empty
+        if (string.IsNullOrWhiteSpace(searchQuery))
+        {
+            return; // Exit the method if the search query is empty
+        }
+
+        try
+        {
+            var response = await ContentClient.SearchGifsAsync(new SearchGifsRequest { Query = searchQuery });
+            gifs = response.Results.ToList();
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Exception in GIF search: ", ex.Message);
+            await JSRuntime.InvokeVoidAsync("alert", "An error occurred while searching for GIFs. Make sure tenor api key for gif is added in appsettings. I won't share my key");
+        }
+    }
+
+    private void Clear()
+    {
+        gifs = null;
+        searchQuery = string.Empty;
+    }
+}

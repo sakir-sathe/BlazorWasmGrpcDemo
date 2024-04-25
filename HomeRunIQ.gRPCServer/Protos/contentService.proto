@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "HomeRunIQ.Proto";
+
+package content;
+
+import "google/protobuf/empty.proto";
+
+// The media content service definition.
+service ContentService {
+  // Search for GIFs based on a query string
+  rpc SearchGifs (SearchGifsRequest) returns (SearchGifsResponse);
+}
+
+// The request message containing the search query.
+message SearchGifsRequest {
+  string query = 1;
+}
+
+// The response message containing the search results.
+message SearchGifsResponse {
+  repeated GifResult results = 1;
+}
+
+// A GIF result containing the URL and title.
+message GifResult {
+  string url = 1;
+  string title = 2;
+}

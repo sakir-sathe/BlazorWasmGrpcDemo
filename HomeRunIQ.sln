@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunIQ.Client", "HomeRunIQ.Client\HomeRunIQ.Client.csproj", "{8F67AD96-7A85-4FFF-8FFD-05E3A72A367F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeRunIQ.Client", "HomeRunIQ.Client\HomeRunIQ.Client.csproj", "{8F67AD96-7A85-4FFF-8FFD-05E3A72A367F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunIQ.gRPCServer", "HomeRunIQ.gRPCServer\HomeRunIQ.gRPCServer.csproj", "{B0A419AB-E871-4706-91D6-BC3F4219699F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeRunIQ.gRPCServer", "HomeRunIQ.gRPCServer\HomeRunIQ.gRPCServer.csproj", "{B0A419AB-E871-4706-91D6-BC3F4219699F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunIQ.Shared", "HomeRunIQ.Shared\HomeRunIQ.Shared.csproj", "{B6515F9A-EDB0-4797-B846-4BF18F3EE1B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B0A419AB-E871-4706-91D6-BC3F4219699F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0A419AB-E871-4706-91D6-BC3F4219699F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0A419AB-E871-4706-91D6-BC3F4219699F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6515F9A-EDB0-4797-B846-4BF18F3EE1B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6515F9A-EDB0-4797-B846-4BF18F3EE1B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6515F9A-EDB0-4797-B846-4BF18F3EE1B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6515F9A-EDB0-4797-B846-4BF18F3EE1B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

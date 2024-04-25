@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -20,6 +20,9 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<Protobuf Include="..\HomeRunIQ.gRPCServer\Protos\contentService.proto" GrpcServices="Client">
+		  <Link>Protos\contentService.proto</Link>
+		</Protobuf>
 		<Protobuf Include="..\HomeRunIQ.gRPCServer\Protos\greet.proto" GrpcServices="Client">
 			<Link>Protos\greet.proto</Link>
 			<OutputDir>Generated</OutputDir>
